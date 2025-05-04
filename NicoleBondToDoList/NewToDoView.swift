@@ -24,7 +24,7 @@ struct NewToDoView: View {
             
             TextField("Enter the task description here...", text: $toDoItem.title, axis: .vertical)
                 .padding()
-                .background(Color(.systemGray6))
+                .background(Color(.systemGroupedBackground))
                 .cornerRadius(20)
             
             Toggle(isOn: $toDoItem.isImportant) {
@@ -32,7 +32,6 @@ struct NewToDoView: View {
                     .fontWeight(.semibold)
                     .italic()
                     .foregroundColor(.red)
-                
             }
             
             Button {
@@ -46,6 +45,9 @@ struct NewToDoView: View {
             }
         }
         .padding(20)
+        .background(Color(.white))
+        
+        Spacer()
     }
     
     func addToDo () {

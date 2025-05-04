@@ -17,52 +17,61 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
-        VStack{
+        ZStack {
+            Color(.systemRed)
+                .ignoresSafeArea()
             
-            //to do text and add button
-            HStack{
-                Text("To-Do List")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .foregroundColor(Color.green)
-                    .multilineTextAlignment(.center)
-                Spacer()
+            VStack{
                 
-                Button {
-                    withAnimation {
-                        self.showNewTask = true
-                    }
-                } label: {
-                    Text("+")
+                //to do text and add button
+                HStack{
+                    Text("To-Do List")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                        .foregroundColor(Color.orange)
-                }
-            }
-            .padding()
-            Spacer()
-            
-            List {
-                ForEach(toDos) { toDoItem in
-                    if toDoItem.isImportant == true {
-                        Text("‼️" + toDoItem.title)
-                    } else {
-                        Text(toDoItem.title)
-                    }
+                        .foregroundColor(Color.green)
+                        .multilineTextAlignment(.center)
+                    Spacer()
                     
+                    Button {
+                        withAnimation {
+                            self.showNewTask = true
+                        }
+                    } label: {
+                        Text("+")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.orange)
+                    }
                 }
-                .onDelete(perform: deleteToDo)
+                .padding()
                 
-                
-                if showNewTask {
-                    NewToDoView(showNewTask: $showNewTask, toDoItem: toDoItem(title: "", isImportant: false))
+                VStack {
+                    List {
+                        ForEach(toDos) { toDoItem in
+                            if toDoItem.isImportant == true {
+                                Text("‼️" + toDoItem.title)
+                            } else {
+                                Text(toDoItem.title)
+                            }
+                            
+                        }
+                        .onDelete(perform: deleteToDo)
+                        
+                    }
+                    .listStyle(.plain)
                 }
+                
                 
             }
-            .listStyle(.plain)
             
+            .safeAreaInset(edge: .bottom) {
+                
+                    if showNewTask {
+                        NewToDoView(showNewTask: $showNewTask, toDoItem: toDoItem(title: "", isImportant: false))
+    
+                }
+            }
         }
-        
     }
     
     func deleteToDo(at offsets: IndexSet) {
