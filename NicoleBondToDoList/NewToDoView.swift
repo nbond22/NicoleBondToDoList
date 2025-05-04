@@ -20,7 +20,7 @@ struct NewToDoView: View {
             Text("What do you need to do?")
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(Color.purple).multilineTextAlignment(.center)
+                .foregroundColor(Color("DeepPurple")).multilineTextAlignment(.center)
             
             TextField("Enter the task description here...", text: $toDoItem.title, axis: .vertical)
                 .padding()
@@ -31,7 +31,7 @@ struct NewToDoView: View {
                 Text("Is it important?")
                     .fontWeight(.semibold)
                     .italic()
-                    .foregroundColor(.red)
+                    .foregroundColor(Color("DeepPurple"))
             }
             
             Button {
@@ -41,11 +41,11 @@ struct NewToDoView: View {
                 Text("Save")
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.green)
+                    .foregroundColor(Color("DeepPurple"))
             }
         }
         .padding(20)
-        .background(Color(.white))
+        .background(Color("LighterPurple"))
         
         Spacer()
     }

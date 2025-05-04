@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color(.systemRed)
+            Color("LightPurple")
                 .ignoresSafeArea()
             
             VStack{
@@ -28,7 +28,7 @@ struct ContentView: View {
                     Text("To-Do List")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                        .foregroundColor(Color.green)
+                        .foregroundColor(Color("DeepPurple"))
                         .multilineTextAlignment(.center)
                     Spacer()
                     
@@ -40,7 +40,7 @@ struct ContentView: View {
                         Text("+")
                             .font(.largeTitle)
                             .fontWeight(.heavy)
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color("DeepPurple"))
                     }
                 }
                 .padding()
