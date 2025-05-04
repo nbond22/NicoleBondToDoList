@@ -11,7 +11,7 @@ import SwiftData
 struct NewToDoView: View {
     
     @Binding var showNewTask: Bool
-    @Bindable var toDoItem: toDoItem
+    @Bindable var ToDoItem: toDoItem
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
@@ -22,12 +22,12 @@ struct NewToDoView: View {
                 .fontWeight(.bold)
                 .foregroundColor(Color("DeepPurple")).multilineTextAlignment(.center)
             
-            TextField("Enter the task description here...", text: $toDoItem.title, axis: .vertical)
+            TextField("Enter the task description here...", text: $ToDoItem.title, axis: .vertical)
                 .padding()
                 .background(Color(.systemGroupedBackground))
                 .cornerRadius(20)
             
-            Toggle(isOn: $toDoItem.isImportant) {
+            Toggle(isOn: $ToDoItem.isImportant) {
                 Text("Is it important?")
                     .fontWeight(.semibold)
                     .italic()
@@ -51,16 +51,19 @@ struct NewToDoView: View {
     }
     
     func addToDo () {
-        let toDo = NicoleBondToDoList.toDoItem(title: toDoItem.title, isImportant: toDoItem.isImportant)
+        let toDo = NicoleBondToDoList.toDoItem(title: ToDoItem.title, isImportant: ToDoItem.isImportant)
         modelContext.insert(toDo)
     }
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: toDoItem.self, configurations: config)
-
-    let toDo = toDoItem(title: "", isImportant: false)
-    return NewToDoView(showNewTask: .constant(true), toDoItem: toDo)
-        .modelContainer(container)
+    
+    NewToDoView(showNewTask: .constant(false), ToDoItem: toDoItem(title: "", isImportant: false))
+    
+//    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//    let container = try! ModelContainer(for: toDoItem.self, configurations: config)
+//
+//    let toDo = toDoItem(title: "", isImportant: false)
+//    return NewToDoView(showNewTask: .constant(true), toDoItem: toDo)
+//        .modelContainer(container)
 }

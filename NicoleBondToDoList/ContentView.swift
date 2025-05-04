@@ -48,15 +48,23 @@ struct ContentView: View {
                 VStack {
                     List {
                         ForEach(toDos) { toDoItem in
-                            if toDoItem.isImportant == true {
-                                Text("‼️" + toDoItem.title)
-                            } else {
-                                Text(toDoItem.title)
+                            VStack {
+                                if toDoItem.isImportant == true {
+                                    Text("‼️" + " " +  toDoItem.title)
+                                } else {
+                                    Text(toDoItem.title)
+                                }
                             }
-                            
+                            .foregroundStyle(Color("DeepPurple"))
+                            .fontWeight(.medium)
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color("LighterPurple"))
+                            .cornerRadius(15)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
                         }
                         .onDelete(perform: deleteToDo)
-                        
                     }
                     .listStyle(.plain)
                 }
@@ -67,7 +75,7 @@ struct ContentView: View {
             .safeAreaInset(edge: .bottom) {
                 
                     if showNewTask {
-                        NewToDoView(showNewTask: $showNewTask, toDoItem: toDoItem(title: "", isImportant: false))
+                        NewToDoView(showNewTask: $showNewTask, ToDoItem: toDoItem(title: "", isImportant: false))
     
                 }
             }
@@ -84,4 +92,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: toDoItem.self)
 }
