@@ -7,9 +7,29 @@
 
 import SwiftUI
 
-struct EditToDoItem: View {
+struct EditToDoView: View {
+    @Binding var task: toDoItem
+    var onSave: () -> Void
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            TextField("Task Title", text: $task.title)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            Toggle("Important", isOn: $task.isImportant)
+
+            Button("Save") {
+                onSave()
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 5)
     }
 }
 
